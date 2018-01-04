@@ -1,4 +1,32 @@
 
+setClass("dbR6S4", slots = c(db = "dbR6"), contains = c("VIRTUAL"))
+setClass("genetic_db", slots = c(ATTR = "list"), contains = c("dbR6S4"))
+
+setMethod("initialize", "genetic_db",
+          function(.Object, ...) {
+            .Object@db<- dbR6$new()
+            .Object@db$add_table("G", new_df = data.frame(0))
+            .Object@db$add_table("A", new_df = data.frame(0))
+            .Object@ATTR = list(names = character(0),   whereIs = new.env(emptyenv()), 
+                                .call = call("."),  na_omit = logical(0), 
+                                which_NA = integer(0), ploidy = integer(0),
+                                char_per_allele = integer(0), n_loci = integer(0),
+                                map = list(), alleles_number = integer(0),
+                                alleles_vector = integer(0), total_alleles = integer(0),
+                                user_levels = character(0), sep = character(0),
+                                missing = character(0), type = character(0),
+                                NA.char = character(0), rm.empty.ind = logical(0),
+                                poly.level = integer(0))
+            .Object
+          }
+)
+
+setMethod("show", "genetic_db",
+          function(object) {
+            callNextMethod()
+          }
+)
+
 #' Generate a genetic database
 
 setGeneric("genetic_db", function(G = data.frame(), 
@@ -26,6 +54,7 @@ setGeneric("genetic_db", function(G = data.frame(),
   
   # creating a new ecogendb object
   object <- dbR6$new()
+  output <- new("genetic_db")
   
   object$write_dataframe(G, "G", chunksize = chunksize, 
                          has_colnames = has_colnames, 
@@ -40,6 +69,7 @@ setGeneric("genetic_db", function(G = data.frame(),
     } else {
       fun_alleles <- "loci_token_to_alleles"
     }
+    
     
     temp_formatG <- formatG(input = matrix(0, 0, 0), ploidy = ploidy, 
                             has_rownames = TRUE,  has_colnames = TRUE,
@@ -76,6 +106,8 @@ setGeneric("genetic_db", function(G = data.frame(),
                               set_ncol = 0,
                               chunksize = chunksize)
       object$remove_table("temp")
+      
+      
       
     } else {
       formatter_chunk_from_db(object, table = "G",
@@ -131,6 +163,27 @@ setGeneric("genetic_db", function(G = data.frame(),
       object$remove_table("G") 
     }
   }
+ 
+  ## construct object
+  output@db <- object
+  parameters <- get_formatG_parameters(temp_formatG)
+  
+  output@ATTR$na_omit <- parameters$na_omit
+  output@ATTR$which_NA <- parameters$which_NA
+  output@ATTR$ploidy <- parameters$ploidy
+  output@ATTR$char_per_allele <- parameters$char_per_allele
+  output@ATTR$n_loci <- parameters$n_loci
+  output@ATTR$map <- parameters$map
+  output@ATTR$alleles_number <- parameters$alleles_number
+  output@ATTR$alleles_vector <- parameters$alleles_vector
+  output@ATTR$total_alleles <- parameters$total_alleles
+  output@ATTR$user_levels <- parameters$user_levels
+  output@ATTR$sep <- sep
+  output@ATTR$missing <- missing
+  output@ATTR$type <- type
+  output@ATTR$NA.char <- NA.char
+  #output@ATTR$rm.empty.ind <- rm.empty.ind
+  output@ATTR$poly.level <- poly.level
   
   object
 })
