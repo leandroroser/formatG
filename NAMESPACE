@@ -1,0 +1,6 @@
+useDynLib(formatG, .registration=TRUE)
+exportPattern("^[[:alpha:]]+")
+importFrom(Rcpp, evalCpp)
+import(reader)
+import(dbR6)
+

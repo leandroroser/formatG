@@ -1,0 +1,19 @@
+Package: formatG
+Type: Package
+Title: Tools for Genetic Data Formatting
+Version: 1.0
+Date: 2017-12-15
+Authors@R: c(person(given = "Leandro", family = "Roser", role = c("aut", "cre"), email = "learoser@gmail.com"))
+Maintainer: Leandro Roser <learoser@gmail.com>
+Description: Tools for Genetic Data Formatting.
+License: GPL (>= 2)
+LazyLoad: yes
+Depends: R (>= 3.0)
+Imports: Rcpp (>= 0.12.14)
+Remotes: leandroroser/reader, leandroroser/dbR6
+LinkingTo: Rcpp
+Collate: 'ZZZ.R' 'formatG.R' 'genetic_db.R' 'RcppExports.R' 
+RoxygenNote: 6.0.1
+NeedsCompilation: yes
+Packaged: 2017-11-21 08:12:58 UTC; leandro
+Author: Leandro Roser [aut, cre]

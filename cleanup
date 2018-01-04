@@ -1,0 +1,8 @@
+
+#!/bin/sh
+
+rm -f src/*.o src/*.so
+
+#rm -rf vignettes/auto/ vignettes/*.log vignettes/*.aux vignettes/*.out vignettes/*.tex
+
+find . -name \*~ -exec rm {} \;
