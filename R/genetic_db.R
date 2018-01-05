@@ -107,8 +107,6 @@ setGeneric("genetic_db", function(G = data.frame(),
                               chunksize = chunksize)
       object$remove_table("temp")
       
-      
-      
     } else {
       formatter_chunk_from_db(object, table = "G",
                               formatG_input = temp_formatG,

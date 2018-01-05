@@ -3,4 +3,6 @@ exportPattern("^[[:alpha:]]+")
 importFrom(Rcpp, evalCpp)
 import(reader)
 import(dbR6)
+importClassesFrom(dbR6)
+importMethodsFrom(dbR6)
 
