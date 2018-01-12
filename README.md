@@ -2,8 +2,8 @@
 
 formatG is an R package for genetic data formatting, written in C++. 
 The package allows to work with small and big data tables. For this latter purpose, 
-the package uses the libraries "dbR6"" and "reader" (the latter also developed in C++) and available on this GitHub repository ([https://github.com/leandroroser/reader](https://github.com/leandroroser/reader), [https://github.com/leandroroser/dbR6](https://github.com/leandroroser/dbR6)).
-The dbR6 package consists of an interface to SQLite based on a R6 class. The interaction with the formatG package allows to store, process and retrieve genetic data from a database in chunks, thus removing the need to store data in memory and allowing to process large files. The reader package allows to read large files from disk.
+the package uses the libraries "dbR6"" and "chunkR" (the latter also developed in C++) and available on this GitHub repository ([https://github.com/leandroroser/chunkR](https://github.com/leandroroser/chunkR), [https://github.com/leandroroser/dbR6](https://github.com/leandroroser/dbR6)).
+The dbR6 package consists of an interface to SQLite based on a R6 class. The interaction with the formatG package allows to store, process and retrieve genetic data from a database in chunks, thus removing the need to store data in memory and allowing to process large files. The chunkR package allows to read large files from disk.
 
 
 ### Example
@@ -56,7 +56,7 @@ get_output(my_g2)
 
 # Integration with the dbR6 package
 
-library(reader)
+library(chunkR)
 library(dbR6)
 
 # let's create a big table
